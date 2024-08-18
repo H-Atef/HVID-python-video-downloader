@@ -1,0 +1,94 @@
+#:kivy 2.3.0
+#:import utils kivy.utils
+#:import Button kivy.uix.button.Button
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+
+<DownloadScreen>:
+    add_list:add_list
+    canvas.before:
+        Color:
+            rgba:utils.get_color_from_hex("#000000")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: "vertical"
+        spacing:10
+        padding:0,0,0,20
+        MDLabel:
+            text: "Choose Video/Audio Quality"
+            font_name:'audiowide'
+            text_size: self.size
+            font_size: 25
+            bold: True
+            halign: 'center'
+            valign: 'middle'
+            color: utils.get_color_from_hex("#FFFFFF") 
+            pos_hint: {'center_x': .5,'center_y': .5} 
+            size_hint: [0.9, 0.2]      
+        ScrollView:
+            do_scroll_y: True
+            do_scroll_x: False
+            size_hint_y: 0.85
+            pos_hint: {'center_x': .5,'center_y': .7}
+            bar_width: 0
+            GridLayout:
+                id:add_list
+                cols:1
+                height:self.minimum_height
+                row_default_height: 80
+                size_hint_y: None
+                padding: 15,10
+                spacing: 15,10
+                on_kv_post:
+                    for i in app.get_list(): \
+                    self.add_widget(Button(text=str(i),
+                    on_press=lambda instance:app.download_file(instance)))
+        Button:
+            text:"Back to Download Page"
+            on_press:
+                app.root.transition=WipeTransition(duration=2)
+                app.get_home_screen()
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#5BC236") 
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]        
+
+        Button:
+            text:"Close Application"
+            on_press:
+                app.exit_app()
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#B03C3F") 
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]
+            
+DownloadScreen:
+    name:"download"
+
+
+<Button>:
+
+    font_size: 20
+    size_hint_min_y: 40
+    size_hint_max_y: 70
+    background_color: 0, 0, 0, 0
+    bold:True
+    font_name:'audiowide'
+    color:utils.get_color_from_hex("#FFFFFF")  if self.state == 'normal' else utils.get_color_from_hex("#000000") 
+    size_hint_x: 0.9
+    pos_hint: {"center_x": .5}
+
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#d4af37") 
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10,]

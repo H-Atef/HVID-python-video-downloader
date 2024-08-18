@@ -1,0 +1,36 @@
+#:kivy 2.3.0
+WelcomeScreen:
+
+<WelcomeScreen>:
+    name:"welcome"
+
+    BoxLayout:
+        size:root.width,root.height
+        MDFloatLayout:
+            Image:
+                pos:self.pos
+                size:self.pos
+                source:app.get_asset(1)
+                keep_ratio: False 
+                allow_stretch: True
+                anim_delay: 0
+                # anim_loop: 1
+                anim_reset: True
+
+            Image:
+                source:app.get_asset(0)
+                size_hint: None, None
+                size_hint: 0.6, 0.5
+                pos_hint: {'center_x': .5, 'center_y': .7}
+                padding: 10, 0
+
+            Image:
+                source:app.get_asset(2)
+                size_hint: None, None
+                size_hint: 0.5, 0.5
+                pos_hint: {'center_x': .5, 'center_y': .1}
+                padding: 10, 0
+        
+
+
+

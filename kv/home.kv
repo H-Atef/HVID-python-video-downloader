@@ -1,0 +1,156 @@
+#:import utils kivy.utils
+#:import CardTransition kivy.uix.screenmanager.CardTransition
+HomeScreen:
+
+<HomeScreen>:
+    name: "home"
+    url:url
+    canvas.before:
+        Color:
+            rgba:utils.get_color_from_hex("#000000")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    on_enter:
+        app.animate_background(lla)
+        app.animate_card(box_card)
+    HomeLayout:
+        id: lla
+    MDCard:
+        id: box_card
+        orientation: "vertical"
+        size_hint: [0.8, 0.65]
+        pos_hint: {"center_x": 0.5, "center_y": 0}
+        md_bg_color:utils.get_color_from_hex("#636363")
+        
+        BoxLayout:
+            padding: [15, 0, 15, 0]
+            orientation: "vertical"
+            MDLabel:
+                text: "Download Videos Now"
+                font_name:'audiowide'
+                text_size: self.size
+                font_size: 20
+                bold: True
+                halign: 'center'
+                valign: 'middle'
+                color: utils.get_color_from_hex("#FFFFFF")
+    
+            MDLabel:
+                text: "Welcome to HVID Downloader"
+                font_name:'audiowide'
+                halign: "center"
+                valign: "middle"
+                bold: True
+                color: utils.get_color_from_hex("#d4af37") 
+        
+        MDTextField:
+            id:url
+            hint_text: "Enter Video URL Here"
+            font_name:'audiowide'
+            line_color_focus:utils.get_color_from_hex("#FFFFFF")
+            text_color_focus:utils.get_color_from_hex("#FFFFFF")
+            hint_text_color_focus:utils.get_color_from_hex("#FFFFFF")
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5}
+        BoxLayout:
+            orientation: "vertical"
+            spacing:10
+            padding:20,20,20,20
+
+            CButton:
+                text: '    Download    '
+                font_name:'audiowide'
+
+                on_press:
+                    app.root.transition=CardTransition(duration=2)
+                    app.get_downlod_screen()
+
+            
+            CButton:
+                text: 'Choose A Path'
+                font_name:'audiowide'
+ 
+                on_press:app.get_dir()
+            # MDFillRoundFlatButton:
+            #     text: "Sign In"
+            #     bold: True
+            #     size_hint_x: 0.8
+            #     pos_hint: {"center_x": .5}
+
+
+            # MDFillRoundFlatButton:
+            #     text: "Sign In"
+            #     bold: True
+            #     size_hint_x: 0.8
+            #     pos_hint: {"center_x": .5}
+
+
+
+<CButton@MDFillRoundFlatButton>:
+
+    font_size: 25
+    size_hint_min_y: 20
+    size_hint_max_y: 40
+    md_bg_color: 0, 0, 0, 0
+    bold:True
+    text_color:utils.get_color_from_hex("#FFFFFF")  if self.state == 'normal' else utils.get_color_from_hex("#000000") 
+    size_hint_x: 0.9
+    pos_hint: {"center_x": .5}
+
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#d4af37") 
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10,]
+
+
+
+<HomeLayout@BoxLayout>:
+    orientation: "vertical"
+             
+    BoxLayout:
+        id: bx
+        orientation: "vertical"
+        size_hint_y: 0.1
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex("#d4af37") 
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [0, 0, 30, 30]
+    FloatLayout:
+        id: circles
+        orientation: "horizontal"
+        
+        # Scatter:
+        #     size_hint: None,None
+            
+        #     Widget:
+        #         canvas.before:
+        #             Color:
+        #                 rgba: utils.get_color_from_hex("#706f70")
+        #             Ellipse:
+        #                 pos: self.pos
+        # Scatter:
+        #     size_hint: None,None
+        #     Widget:
+        #         canvas.before:
+        #             Color:
+        #                 rgba: utils.get_color_from_hex("#706f70")
+        #             Ellipse:
+        #                 pos: self.pos
+        # Scatter:
+        #     size_hint: None, None
+        #     Widget:
+        #         canvas.before:
+        #             Color:
+        #                 rgba: utils.get_color_from_hex("#706f70")
+        #             Ellipse:
+        #                 pos: self.pos
+    
+
